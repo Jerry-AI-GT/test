@@ -4,7 +4,7 @@ import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
-// import EditorFooter from "./EditorFooter";
+import EditorFooter from "./EditorFooter";
 import { Problem } from "@/utils/types/problems";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "@/firebase/firebase";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { problems } from "@/utils/problems/page";
 import { useRouter } from "next/router";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-// import useLocalStorage from "@/hooks/useLocalStorage";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 type PlaygroundProps = {
   problem: Problem;
@@ -34,13 +34,13 @@ const Playground: React.FC<PlaygroundProps> = ({
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
   let [userCode, setUserCode] = useState<string>(problem.starterCode);
 
-  // const [fontSize, setFontSize] = useLocalStorage("lcc-fontSize", "16px");
+  const [fontSize, setFontSize] = useLocalStorage("lcc-fontSize", "16px");
 
-  // const [settings, setSettings] = useState<ISettings>({
-  // 	fontSize: fontSize,
-  // 	settingsModalIsOpen: false,
-  // 	dropdownIsOpen: false,
-  // });
+  const [settings, setSettings] = useState<ISettings>({
+    fontSize: fontSize,
+    settingsModalIsOpen: false,
+    dropdownIsOpen: false,
+  });
 
   const [user] = useAuthState(auth);
   const {
@@ -119,7 +119,7 @@ const Playground: React.FC<PlaygroundProps> = ({
 
   return (
     <div className="flex flex-col bg-dark-layer-1 relative overflow-x-hidden">
-      {/* <PreferenceNav settings={settings} setSettings={setSettings} /> */}
+      <PreferenceNav settings={settings} setSettings={setSettings} />
 
       <Split
         className="h-[calc(100vh-94px)]"
@@ -133,7 +133,7 @@ const Playground: React.FC<PlaygroundProps> = ({
             theme={vscodeDark}
             onChange={onChange}
             extensions={[javascript()]}
-            // style={{ fontSize: settings.fontSize }}
+            style={{ fontSize: settings.fontSize }}
           />
         </div>
         <div className="w-full px-5 overflow-auto">
@@ -179,7 +179,7 @@ const Playground: React.FC<PlaygroundProps> = ({
           </div>
         </div>
       </Split>
-      {/* <EditorFooter handleSubmit={handleSubmit} /> */}
+      <EditorFooter handleSubmit={handleSubmit} />
     </div>
   );
 };

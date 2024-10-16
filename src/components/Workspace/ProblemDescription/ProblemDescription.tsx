@@ -1,5 +1,5 @@
-// import CircleSkeleton from "@/components/Skeletons/CircleSkeleton";
-// import RectangleSkeleton from "@/components/Skeletons/RectangleSkeleton";
+import CircleSkeleton from "@/components/Skeletons/CircleSkeleton";
+import RectangleSkeleton from "@/components/Skeletons/RectangleSkeleton";
 import { auth, firestore } from "@/firebase/firebase";
 import { DBProblem, Problem } from "@/utils/types/problems";
 import {
@@ -278,15 +278,15 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
               </div>
             )}
 
-            {/* {loading && (
-							<div className='mt-3 flex space-x-2'>
-								<RectangleSkeleton />
-								<CircleSkeleton />
-								<RectangleSkeleton />
-								<RectangleSkeleton />
-								<CircleSkeleton />
-							</div>
-						)} */}
+            {loading && (
+              <div className="mt-3 flex space-x-2">
+                <RectangleSkeleton />
+                <CircleSkeleton />
+                <RectangleSkeleton />
+                <RectangleSkeleton />
+                <CircleSkeleton />
+              </div>
+            )}
 
             {/* Problem Statement(paragraphs) */}
             <div className="text-white text-sm">
