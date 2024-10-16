@@ -1,54 +1,85 @@
+"use client";
 import Image from "next/image";
+import Head from "next/head";
+import { RecoilRoot } from "recoil";
+import ProblemsTable from "@/ProblemsTable/ProblemsTable";
+import Topbar from "@/components/Topbar/Topbar";
+// import useHasMounted from "@/hooks/useHasMounted";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { useState } from "react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <RecoilRoot>
+      <Head>
+        <title>LeetClone</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.png" />
+        <meta
+          name="description"
+          content="Web application that contains leetcode problems and video solutions"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </Head>
+      <ToastContainer />
+      {/* const [loadingProblems, setLoadingProblems] = useState(true); const */}
+      {/* hasMounted = useHasMounted(); if (!hasMounted) return null; */}
+      <main className="bg-dark-layer-2 min-h-screen">
+        <Topbar />
+        <h1
+          className="text-2xl text-center text-gray-700 dark:text-gray-400 font-medium
+					uppercase mt-10 mb-5"
+        >
+          &ldquo; QUALITY OVER QUANTITY &rdquo; 👇
+        </h1>
+        <div className="relative overflow-x-auto mx-auto px-6 pb-10">
+          {/* {loadingProblems && (
+            <div className="max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse">
+              {[...Array(10)].map((_, idx) => (
+                <LoadingSkeleton key={idx} />
+              ))}
+            </div>
+          )} */}
+          <table className="text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto">
+            {/* {!loadingProblems && (
+              <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 border-b ">
+                <tr>
+                  <th scope="col" className="px-1 py-3 w-0 font-medium">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3 w-0 font-medium">
+                    Title
+                  </th>
+                  <th scope="col" className="px-6 py-3 w-0 font-medium">
+                    Difficulty
+                  </th>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+                  <th scope="col" className="px-6 py-3 w-0 font-medium">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3 w-0 font-medium">
+                    Solution
+                  </th>
+                </tr>
+              </thead>
+            )}
+            <ProblemsTable setLoadingProblems={setLoadingProblems} /> */}
+          </table>
         </div>
       </main>
-    </div>
+    </RecoilRoot>
   );
 }
+
+const LoadingSkeleton = () => {
+  return (
+    <div className="flex items-center space-x-12 mt-4 px-6">
+      <div className="w-6 h-6 shrink-0 rounded-full bg-dark-layer-1"></div>
+      <div className="h-4 sm:w-52  w-32  rounded-full bg-dark-layer-1"></div>
+      <div className="h-4 sm:w-52  w-32 rounded-full bg-dark-layer-1"></div>
+      <div className="h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1"></div>
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+};
