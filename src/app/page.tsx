@@ -11,6 +11,25 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 export default function Home() {
+  const [inputs, setInputs] = useState({
+    id: "",
+    title: "",
+    difficulty: "",
+    category: "",
+    videoId: "",
+    link: "",
+    order: 0,
+    likes: 0,
+    dislikes: 0,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+  console.log(inputs);
   return (
     <RecoilRoot>
       <Head>
@@ -64,9 +83,55 @@ export default function Home() {
                 </tr>
               </thead>
             )}
-            <ProblemsTable setLoadingProblems={setLoadingProblems} /> */}
+              <ProblemsTable setLoadingProblems={setLoadingProblems} />*/}
           </table>
         </div>
+
+        <form className="p-6 flex flex-col max-w-sm gap-3">
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="problem id"
+            name="id"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="title"
+            name="title"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="difficulty"
+            name="difficulty"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="category"
+            name="category"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="videoId?"
+            name="videoId"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="link?"
+            name="link"
+          />
+          <input
+            onChange={handleInputChange}
+            type="text"
+            placeholder="order"
+            name="order"
+          />
+          <button className="bg-white ">save to db</button>
+        </form>
       </main>
     </RecoilRoot>
   );
