@@ -9,27 +9,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useState } from "react";
+import firebase from "firebase/compat/app";
+
+import { setDoc, doc } from "@firebase/firestore";
+import { firestore } from "@/firebase/firebase";
 
 export default function Home() {
-  const [inputs, setInputs] = useState({
-    id: "",
-    title: "",
-    difficulty: "",
-    category: "",
-    videoId: "",
-    link: "",
-    order: 0,
-    likes: 0,
-    dislikes: 0,
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
-  };
-  console.log(inputs);
+  const [loadingProblems, setLoadingProblems] = useState(true);
   return (
     <RecoilRoot>
       <Head>
@@ -42,8 +28,8 @@ export default function Home() {
         />
       </Head>
       <ToastContainer />
-      {/* const [loadingProblems, setLoadingProblems] = useState(true); const */}
-      {/* hasMounted = useHasMounted(); if (!hasMounted) return null; */}
+
+      {/*  const hasMounted = useHasMounted(); if (!hasMounted) return null; */}
       <main className="bg-dark-layer-2 min-h-screen">
         <Topbar />
         <h1
@@ -53,15 +39,15 @@ export default function Home() {
           &ldquo; QUALITY OVER QUANTITY &rdquo; 👇
         </h1>
         <div className="relative overflow-x-auto mx-auto px-6 pb-10">
-          {/* {loadingProblems && (
+          {loadingProblems && (
             <div className="max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse">
               {[...Array(10)].map((_, idx) => (
                 <LoadingSkeleton key={idx} />
               ))}
             </div>
-          )} */}
+          )}
           <table className="text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto">
-            {/* {!loadingProblems && (
+            {!loadingProblems && (
               <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 border-b ">
                 <tr>
                   <th scope="col" className="px-1 py-3 w-0 font-medium">
@@ -83,55 +69,9 @@ export default function Home() {
                 </tr>
               </thead>
             )}
-              <ProblemsTable setLoadingProblems={setLoadingProblems} />*/}
+            <ProblemsTable setLoadingProblems={setLoadingProblems} />
           </table>
         </div>
-
-        <form className="p-6 flex flex-col max-w-sm gap-3">
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="problem id"
-            name="id"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="title"
-            name="title"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="difficulty"
-            name="difficulty"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="category"
-            name="category"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="videoId?"
-            name="videoId"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="link?"
-            name="link"
-          />
-          <input
-            onChange={handleInputChange}
-            type="text"
-            placeholder="order"
-            name="order"
-          />
-          <button className="bg-white ">save to db</button>
-        </form>
       </main>
     </RecoilRoot>
   );
